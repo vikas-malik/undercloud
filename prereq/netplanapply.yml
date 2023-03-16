@@ -1,0 +1,10 @@
+---
+- become_user: root
+# Customized netplan
+- name: Replace netplan existing yml files
+  ansible.builtin.copy:
+    src: "/networks/undercloud/00-installer-config.yaml"
+    dest: /etc/netplan/00-installer-config.yaml
+
+- name: Start Netplan apply
+  command: sudo netplan apply

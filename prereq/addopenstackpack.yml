@@ -1,0 +1,12 @@
+---
+- name: install addition packges for openstack
+  ansible.builtin.apt:
+    name:
+      - build-essential
+      - git
+      - chrony
+      - openssh-server
+      - python3-dev
+      - sshpass
+    state: present
+    update_cache: true

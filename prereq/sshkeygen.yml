@@ -1,0 +1,5 @@
+---
+- name: Generate 4096 bit ssh key
+  ansible.builtin.command: ssh-keygen -t rsa -b 4096
+  args:
+    creates: ~/.ssh/id_rsa

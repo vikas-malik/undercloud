@@ -1,0 +1,9 @@
+---
+- name: Give Sudo access to openstack user
+  ansible.builtin.blockinfile:
+    path: /etc/sudoers
+    insertafter: 'root ALL=(ALL) ALL'
+    block: |
+      # Sudo access for openstack user
+      openstack ALL=(ALL) NOPASSWD: ALL
+

@@ -1,0 +1,11 @@
+---
+- name: commentout the existing 127.0.1.1 line in file
+  tags: commenthost
+  ansible.builtin.lineinfile:
+    path: /etc/hosts
+    # String to search
+    regexp: '(^127.0.1.1 .*)'
+    line: '# \1'
+    backrefs: true
+    state: present
+  register: commenthost

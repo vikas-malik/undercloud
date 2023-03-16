@@ -1,0 +1,6 @@
+---
+- name: Clone openstack Git repository
+  ansible.builtin.git:
+    repo: 'https://opendev.org/openstack/openstack-ansible'
+    dest: /opt/openstack-ansible
+    version: 26.0.1

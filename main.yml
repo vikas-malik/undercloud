@@ -1,0 +1,33 @@
+---
+- hosts: all
+  become: true
+  gather_facts: true
+  handlers:
+    - name: restart sshd
+      ansible.builtin.service:
+        name: sshd
+        state: restarted
+  tasks:
+    - name: Do all prequisites for undercloud
+      ansible.builtin.include_tasks:
+        file: prereq/addsudo.yml
+    
+    - name: commentout the existing 127.0.1.1 line in file
+      ansible.builtin.include_tasks:
+        file: prereq/addhosts.yml
+    
+    - name: Update cache and upgrade all repositories, restart if required
+      ansible.builtin.include_tasks:
+        file: prereq/updateupgrade.yml
+    
+    - name: Add essential packages for openstack setup on undercloud
+      ansible.builtin.include_tasks:
+        file: prereq/addopenstackpack.yml
+    
+    - name: Configure and sync chrony to India Standard Time +5:30 GMT
+      ansible.builtin.include_tasks:
+        file: prereq/syncchrony.yml
+    
+    - name: Clone openstack git repository
+      ansible.builtin.include_tasks:
+        file: prereq/openstackgitrepo.yml
